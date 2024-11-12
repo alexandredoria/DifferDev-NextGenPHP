@@ -19,4 +19,4 @@ Gerar o coverage
 ```bash
 $ ./shell/composer coverage
 ```````
-Os arquivos estarão na pasta ```./html/index.html```
+Os arquivos estarão na pasta ```./public/coverage/index.html```
