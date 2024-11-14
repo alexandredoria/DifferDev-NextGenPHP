@@ -1,0 +1,13 @@
+{
+    "authors": [
+        {
+            "name": "Alexandre Dória",
+            "email": "alexandredoria.01@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "MyLog\\": "src/"
+        }
+    }
+}
