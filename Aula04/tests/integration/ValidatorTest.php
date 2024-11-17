@@ -25,9 +25,9 @@ final class ValidatorTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    public function testClassValidatorShouldValidateMultipleValidations(): void
+    #[DataProvider('positiveDataProvider')]
+    public function testClassValidatorShouldValidateMultipleValidations($value, $expected): void
     {
-        $value = '302';
         $result1 = Validator::validateInteger($value);
         $result2 = Validator::validateGreaterThan($value, 200);
         $result3 = Validator::validateEven($value);
@@ -35,7 +35,7 @@ final class ValidatorTest extends \PHPUnit\Framework\TestCase
         $result5 = Validator::validateFloat($value);
         $result6 = Validator::validateBoolean($value);
 
-        $this->assertTrue($result1 && $result2 && $result3 && $result4 && !$result5 && !$result6);
+        $this->assertEquals(($result1 && $result2 && $result3 && $result4 && !$result5 && !$result6) , $expected);
     }
 
     #[DataProvider('positiveDataProvider')]
