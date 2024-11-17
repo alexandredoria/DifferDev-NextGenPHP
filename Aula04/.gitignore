@@ -1,0 +1,9 @@
+# Composer
+/vendor
+
+# PHPUnit
+/.phpunit.cache
+.phpunit.result.cache
+
+# Coverage
+/public/coverage
