@@ -51,4 +51,14 @@ final class ValidatorTest extends \PHPUnit\Framework\TestCase
         $result = $validationGroup->validate($value);
         $this->assertEquals($result, $expected);
     }
+
+    public function testClassValidatorShouldThrowAnException(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $value = date('Y-m-d');
+        $validator = new Validator;
+
+        $validationGroup = $validator->addValidation(DateTime::class);
+        $result = $validationGroup->validate($value);
+    }
 }

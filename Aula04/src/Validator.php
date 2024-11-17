@@ -2,7 +2,9 @@
 
 namespace DifferDev;
 
+use DifferDev\Interfaces\ValidatorInterface;
 use DifferDev\Validators;
+use InvalidArgumentException;
 
 class Validator
 {
@@ -45,6 +47,11 @@ class Validator
     
     public function addValidation(string $validatorClass): self
     {
+        if (!is_subclass_of($validatorClass, ValidatorInterface::class))
+        {
+            throw new InvalidArgumentException("$validatorClass does not implement " . ValidatorInterface::class, 1);
+        }
+
         $args = func_get_args();
         array_shift($args);
 
