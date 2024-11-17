@@ -47,7 +47,7 @@ class Validator
     
     public function addValidation(string $validatorClass): self
     {
-        if (!is_subclass_of($validatorClass, ValidatorInterface::class))
+        if (!in_array(ValidatorInterface::class, class_implements($validatorClass)))
         {
             throw new InvalidArgumentException("$validatorClass does not implement " . ValidatorInterface::class, 1);
         }
