@@ -43,22 +43,12 @@ final class ValidatorTest extends \PHPUnit\Framework\TestCase
     {
         $validator = new Validator;
 
-        $validationGroup = $validator->addValidation(Validators\IsInteger::class)
-                                     ->addValidation(Validators\IsGreaterThan::class, 200)
-                                     ->addValidation(Validators\IsBetween::class, 200, 400)
-                                     ->addValidation(Validators\IsEven::class);
+        $validationGroup = $validator->addValidation( new Validators\IsInteger)
+                                     ->addValidation( new Validators\IsGreaterThan(200))
+                                     ->addValidation( new Validators\IsBetween(200, 400))
+                                     ->addValidation( new Validators\IsEven);
 
         $result = $validationGroup->validate($value);
         $this->assertEquals($result, $expected);
-    }
-
-    public function testClassValidatorShouldThrowAnException(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $value = date('Y-m-d');
-        $validator = new Validator;
-
-        $validationGroup = $validator->addValidation(DateTime::class);
-        $result = $validationGroup->validate($value);
     }
 }

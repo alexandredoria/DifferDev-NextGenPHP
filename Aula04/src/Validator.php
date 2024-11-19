@@ -45,25 +45,16 @@ class Validator
         return $validator->execute($value);
     }
     
-    public function addValidation(string $validatorClass): self
+    public function addValidation(ValidatorInterface $validator): self
     {
-        if (!in_array(ValidatorInterface::class, class_implements($validatorClass)))
-        {
-            throw new InvalidArgumentException("$validatorClass does not implement " . ValidatorInterface::class, 1);
-        }
-
-        $args = func_get_args();
-        array_shift($args);
-
-        $this->validators[] = ['class' => $validatorClass, 'args' => $args];
+        $this->validators[] = $validator;
         return $this;
     }
 
     public function validate(mixed $value): bool
     {
         foreach ($this->validators as $validator) {
-            $validatorObj = new $validator['class'](...$validator['args']);
-            if (!$validatorObj->execute($value)) {
+            if (!$validator->execute($value)) {
                 return false;
             }
         }
